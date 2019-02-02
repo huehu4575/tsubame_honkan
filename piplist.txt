@@ -1,7 +1,6 @@
-chainer==4.5.0
+chainer==5.2.0
 chainercv==0.11.0
-chainermn==1.3.1
-cupy-cuda80==4.5.0
+cupy-cuda80==5.2.0
 cycler==0.10.0
 Cython==0.29.3
 fastrlock==0.4

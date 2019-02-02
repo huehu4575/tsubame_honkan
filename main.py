@@ -44,11 +44,11 @@ def train(network_object, dataset, testdataset, batchsize=128, gpu_id=0, max_epo
     args = parser.parse_args()
 
     # prepare dataset
-    train_size = int(len(dataset) * 0.9)
+    train_size = int(len(dataset) * 1.0)
     train, _ = chainer.datasets.split_dataset_random(Honkan_dataset, train_size, seed=0)
     #train_size = int(len(train_val) * 0.9)
     #train, valid = chainer.datasets.split_dataset_random(train_val, train_size, seed=0)
-    test_size = int(len(testdataset) * 0.5)
+    test_size = int(len(testdataset) * 0.2)
     test, valid = chainer.datasets.split_dataset_random(Honkan_testdataset, test_size, seed=0)
     # data augement
     train_dataset = TransformDataset(train, partial(transform, train=True))
@@ -158,7 +158,7 @@ chainer.config.autotune = True
 #img_root2 = r'label1'
 #img_root3 = r'label2'
 #dir_root = r'D:\program\python\sysprogr3\sysprogr3\school_map'
-dir_root = r'/gs/hs0/tga-systemcontrolproject/TRdata_cropped/selected_images/'
+dir_root = r'/gs/hs0/tga-systemcontrolproject/TRdata_cropped_2/selected_images/'
 test_root = r'/gs/hs0/tga-systemcontrolproject/TSdata/selected_images/'
 img_root1 = r'1f00'
 img_root2 = r'1f01'
@@ -219,7 +219,7 @@ img_root = [img_root1, img_root2, img_root3, img_root4, img_root5, img_root6, im
             img_root40, img_root41, img_root42, img_root43, img_root44, img_root45, img_root46, img_root47, img_root48, img_root49, 
             img_root50, img_root51, img_root52]
 
-N = 3500; # １クラス当たりN個乱数で，抽出する．
+N = 4000; # １クラス当たりN個乱数で，抽出する．
 M=70;
 Honkan_dataset = create_dataset.create_data_set(dir_root, img_root,[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51], N)
 print(len(Honkan_dataset))
@@ -232,4 +232,4 @@ print(len(Honkan_dataset))
 #model = train(network_composition.MyNet(17), Honkan_dataset, batchsize=1, max_epoch=100, base_lr=0.01, lr_decay=(30, 'epoch'))
 #model = train(network_composition.DeepCNN(35), Honkan_dataset, batchsize=12, max_epoch=60, base_lr=0.01, lr_decay=(30, 'epoch'), postfix=TimeName)
 model = train(network_composition.DeepCNN(52),
-Honkan_dataset,Honkan_testdataset,batchsize=300,max_epoch=100, base_lr=0.01, lr_decay=(30, 'epoch'), postfix=TimeName)
+Honkan_dataset,Honkan_testdataset,batchsize=300,max_epoch=60, base_lr=0.01, lr_decay=(30, 'epoch'), postfix=TimeName)

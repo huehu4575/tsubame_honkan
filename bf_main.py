@@ -44,11 +44,11 @@ def train(network_object, dataset, testdataset, batchsize=128, gpu_id=0, max_epo
     args = parser.parse_args()
 
     # prepare dataset
-    train_size = int(len(dataset) * 0.9)
+    train_size = int(len(dataset) * 1.0)
     train, _ = chainer.datasets.split_dataset_random(Honkan_dataset, train_size, seed=0)
     #train_size = int(len(train_val) * 0.9)
     #train, valid = chainer.datasets.split_dataset_random(train_val, train_size, seed=0)
-    test_size = int(len(testdataset) * 0.5)
+    test_size = int(len(testdataset) * 0.2)
     test, valid = chainer.datasets.split_dataset_random(Honkan_testdataset, test_size, seed=0)
     # data augement
     train_dataset = TransformDataset(train, partial(transform, train=True))
@@ -149,7 +149,7 @@ chainer.config.autotune = True
 
 # dataset path
 # imageの入っているpathを指定
-dir_root = r'/gs/hs0/tga-systemcontrolproject/TRdata_cropped/selected_images/'
+dir_root = r'/gs/hs0/tga-systemcontrolproject/TRdata_cropped_2/selected_images/'
 test_root = r'/gs/hs0/tga-systemcontrolproject/TSdata/selected_images/'
 img_root1  = r'bf00'
 img_root2  = r'bf01'
@@ -167,7 +167,7 @@ img_root13 = r'bf12'
 img_root = [img_root1, img_root2, img_root3, img_root4, img_root5, img_root6, img_root7, img_root8, img_root9, 
             img_root10, img_root11, img_root12, img_root13]
 
-N = 3500; # １クラス当たりN個乱数で，抽出する．
+N = 4000; # １クラス当たりN個乱数で，抽出する．
 M=70;
 Honkan_dataset = create_dataset.create_data_set(dir_root, img_root,[0,1,2,3,4,5,6,7,8,9,10,11,12], N)
 print(len(Honkan_dataset))
